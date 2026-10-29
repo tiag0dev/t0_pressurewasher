@@ -1,0 +1,6 @@
+# Prop sources (model, Blender scene, build pipeline): not distributed
+source/
+*.blend
+*.blend1
+__pycache__/
+*.pyc
