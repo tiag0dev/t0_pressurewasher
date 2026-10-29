@@ -21,8 +21,8 @@ Config.Aim = {
 }
 
 Config.Jet = {
-    range = 8.0,          -- portée maximale du raycast (m)
-    effective = 5.0,      -- au-delà, le lavage perd en efficacité jusqu'à range
+    range = 11.0,         -- portée maximale du raycast (m)
+    effective = 7.0,   -- au-delà, le lavage perd en efficacité jusqu'à range
     minDistance = 0.4,    -- trop près : pas de lavage
     -- Effets vanilla vérifiés (core). Rendu et axe d'émission à valider en jeu.
     asset = 'core',
@@ -37,7 +37,7 @@ Config.Jet = {
     -- Si la brume faiblit encore avant la relance, baisser cette valeur.
     refreshMs = 2500,
     effects = {
-        { effect = 'ent_sht_extinguisher', scale = 1.2, alpha = 1.0, layers = 5, rot = vec3(-90.0, 0.0, 0.0) },
+        { effect = 'ent_sht_extinguisher', scale = 1.8, alpha = 1.0, layers = 5, rot = vec3(-90.0, 0.0, 0.0) },
         -- { effect = 'ent_sht_extinguisher_water', scale = 0.3 }, -- filet d'eau au centre de la brume
     },
     rotOffset = vec3(0.0, 0.0, 0.0), -- correction si l'effet n'émet pas selon +Y
