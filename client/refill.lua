@@ -58,7 +58,7 @@ function PW.refill()
     local duration, reason = lib.callback.await('t0_pressurewasher:refillStart', false, e.slot)
     if not duration then
         PW.refilling = false
-        return lib.notify({ description = Config.Locale[reason or 'busy'] or Config.Locale.busy, type = 'error' })
+        return lib.notify({ description = Config.Locale[reason or 'busy'] or Config.Locale.busy, type = 'error', style = Config.NotifyStyle })
     end
 
     SetPedCurrentWeaponVisible(ped, false, false, false, false)
@@ -84,7 +84,7 @@ function PW.refill()
     PW.refilling = false
 
     if water then
-        lib.notify({ description = Config.Locale.refilled:format(math.floor(water / Config.Tank.capacity * 100 + 0.5)), type = 'success' })
+        lib.notify({ description = Config.Locale.refilled:format(math.floor(water / Config.Tank.capacity * 100 + 0.5)), type = 'success', style = Config.NotifyStyle })
     end
 end
 

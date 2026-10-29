@@ -90,6 +90,15 @@ Config.Remote = {
     drawDistance = 60.0,
 }
 
+-- ox_lib notifications in the t0 UI style (set to nil to keep the ox_lib default look).
+Config.NotifyStyle = {
+    backgroundColor = 'rgba(8, 8, 8, 0.9)',
+    color = '#f4f4f2',
+    border = '1px solid rgba(255, 255, 255, 0.14)',
+    borderRadius = '5px',
+    fontFamily = "'JetBrains Mono', Consolas, monospace",
+}
+
 -- Language: 'en' or 'fr' (add your own table below).
 Config.Lang = 'en'
 

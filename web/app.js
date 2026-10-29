@@ -1,8 +1,8 @@
 // Jauge du réservoir, illustration du remplissage + son du jet synthétisé (WebAudio : bruit filtré + ronflement moteur).
 // Aucune banque audio GTA : le son est généré ici.
 const gauge = document.getElementById('gauge');
-const fill = gauge.querySelector('.fill');
 const pct = gauge.querySelector('.pct');
+const blocks = Array.from({ length: 10 }, () => gauge.querySelector('.blocks').appendChild(document.createElement('i')));
 
 let ctx = null;
 let master = null;
@@ -125,7 +125,7 @@ window.addEventListener('message', (e) => {
     if (d.action === 'gauge') {
         gauge.classList.toggle('hidden', !d.show);
         const p = Math.round(Math.max(0, Math.min(1, d.value)) * 100);
-        fill.style.width = p + '%';
+        blocks.forEach((b, i) => b.classList.toggle('on', i < Math.ceil(p / 10)));
         pct.textContent = p + '%';
         gauge.classList.toggle('low', p <= 15);
     } else if (d.action === 'refill') {

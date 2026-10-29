@@ -1,51 +1,66 @@
-html, body { margin: 0; background: transparent; overflow: hidden; font-family: Arial, sans-serif; }
+/* t0 UI identity, "Terminal" track: black & white, JetBrains Mono, 4-5px radius. */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
+:root {
+    --t0-bg: rgba(8, 8, 8, 0.9);
+    --t0-line: rgba(255, 255, 255, 0.14);
+    --t0-text: #f4f4f2;
+    --t0-sub: #b8b8b4;
+    --t0-mute: #8c8c88;
+    --t0-err: #e5484d;
+    --t0-font: 'JetBrains Mono', Consolas, ui-monospace, monospace;
+}
+
+html, body { margin: 0; background: transparent; overflow: hidden; font-family: var(--t0-font); color: var(--t0-text); }
+
+.t0-panel { background: var(--t0-bg); border: 1px solid var(--t0-line); border-radius: 5px; }
+.t0-tag { font-size: 11px; color: var(--t0-mute); letter-spacing: 0.04em; }
+.t0-tag b { color: var(--t0-text); }
+kbd {
+    display: inline-block; padding: 1px 6px; border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5); border-bottom-width: 2px;
+    background: #000; color: var(--t0-text); font: 700 11px var(--t0-font);
+}
+
+/* Jauge du réservoir : tank ▮▮▮▮▮▮▮▯▯▯ 78% */
 #gauge {
     position: absolute; right: 1.6vw; bottom: 22vh;
-    display: flex; align-items: center; gap: 8px;
-    padding: 6px 10px; border-radius: 6px;
-    background: rgba(28, 31, 34, 0.72);
-    color: #e8f6f6; font-size: 12px;
-    transition: opacity 0.25s;
+    display: flex; align-items: center; gap: 9px;
+    padding: 6px 10px; font-size: 12px;
+    transition: opacity 0.2s;
 }
 #gauge.hidden { opacity: 0; }
-#gauge .drop {
-    width: 9px; height: 9px; background: #2ec4c4;
-    border-radius: 0 50% 50% 50%; transform: rotate(45deg);
-}
-#gauge .bar { width: 90px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.15); overflow: hidden; }
-#gauge .fill { height: 100%; width: 100%; background: #2ec4c4; transition: width 0.25s linear; }
-#gauge.low .fill, #gauge.low .drop { background: #e0654a; }
-#gauge .pct { min-width: 32px; text-align: right; }
+#gauge .lbl { color: var(--t0-sub); }
+#gauge .blocks { display: flex; gap: 2px; }
+#gauge .blocks i { width: 6px; height: 12px; border-radius: 1px; background: rgba(255, 255, 255, 0.18); }
+#gauge .blocks i.on { background: var(--t0-text); }
+#gauge.low .blocks i.on { background: var(--t0-err); }
+#gauge.low .pct { color: var(--t0-err); }
+#gauge .pct { min-width: 34px; text-align: right; font-weight: 700; }
 
-/* Remplissage : bouteille qui se vide dans le nettoyeur */
+/* Remplissage : bouteille qui se vide dans le nettoyeur (dessin au trait) */
 #refill {
     position: absolute; left: 50%; bottom: 13vh; transform: translateX(-50%);
-    width: 320px; padding: 12px 14px 10px; border-radius: 10px;
-    background: rgba(28, 31, 34, 0.82); color: #e8f6f6; font-size: 13px;
-    transition: opacity 0.25s, transform 0.25s;
+    width: 320px; padding: 12px 14px 12px; font-size: 13px;
+    transition: opacity 0.2s, transform 0.2s;
 }
-#refill.hidden { opacity: 0; transform: translateX(-50%) translateY(10px); }
-#refill svg { display: block; width: 100%; height: auto; }
-#refill .rf-body { fill: #f2c230; stroke: #8c6a0c; stroke-width: 2; }
-#refill .rf-handle, #refill .rf-nozzle, #refill .rf-inlet { fill: #3a3f44; }
-#refill .rf-glass { fill: rgba(255, 255, 255, 0.12); stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.5; }
-#refill .rf-shine { fill: rgba(255, 255, 255, 0.35); }
-#refill .rf-label { fill: rgba(46, 196, 196, 0.55); }
+#refill.hidden { opacity: 0; transform: translateX(-50%) translateY(8px); }
+#refill svg { display: block; width: 100%; height: auto; margin-top: 6px; }
+#refill .rf-body { fill: #141414; stroke: var(--t0-text); stroke-width: 1.5; }
+#refill .rf-handle, #refill .rf-nozzle, #refill .rf-inlet { fill: var(--t0-text); }
+#refill .rf-glass { fill: rgba(255, 255, 255, 0.06); stroke: rgba(255, 255, 255, 0.6); stroke-width: 1.5; }
+#refill .rf-shine { fill: rgba(0, 0, 0, 0.35); }
+#refill .rf-label { fill: rgba(255, 255, 255, 0.25); }
+#refill .rf-water { fill: rgba(244, 244, 242, 0.85); }
 #rf-tank-water, #rf-bottle-water {
     transform-box: fill-box; transform-origin: bottom;
     transition-property: transform; transition-timing-function: linear;
 }
 #rf-stream {
-    stroke: #7fe3e3; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 5 4;
+    stroke: var(--t0-text); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 5 4;
     animation: rf-flow 0.3s linear infinite; opacity: 0; transition: opacity 0.2s;
 }
 #refill.pouring #rf-stream { opacity: 1; }
 @keyframes rf-flow { to { stroke-dashoffset: -9; } }
-#refill .rf-text { display: flex; justify-content: space-between; margin-top: 6px; font-weight: bold; }
-#refill .rf-pct { color: #2ec4c4; }
-#refill .rf-hint { margin-top: 4px; font-size: 11px; opacity: 0.75; }
-#refill kbd {
-    display: inline-block; padding: 0 5px; border-radius: 3px;
-    background: rgba(255, 255, 255, 0.15); font-family: inherit;
-}
+#refill .rf-text { display: flex; justify-content: space-between; margin-top: 8px; font-weight: 700; }
+#refill .rf-hint { margin-top: 6px; font-size: 11px; color: var(--t0-sub); }

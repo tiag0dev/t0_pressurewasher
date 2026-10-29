@@ -5,17 +5,15 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="gauge" class="hidden">
-    <div class="drop"></div>
-    <div class="bar"><div class="fill"></div></div>
+<div id="gauge" class="t0-panel hidden">
+    <span class="lbl">tank</span>
+    <div class="blocks"></div>
     <span class="pct">100%</span>
 </div>
-<div id="refill" class="hidden">
+<div id="refill" class="t0-panel hidden">
+    <div class="t0-tag"><b>t0</b> / pressurewasher</div>
     <svg viewBox="0 0 320 180" aria-hidden="true">
         <defs>
-            <linearGradient id="rf-water" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#7fe3e3"/><stop offset="1" stop-color="#1f9fb0"/>
-            </linearGradient>
             <clipPath id="rf-tank"><rect x="56" y="117" width="88" height="31" rx="5"/></clipPath>
             <clipPath id="rf-bottle"><rect x="-15" y="-73" width="30" height="55" rx="7"/></clipPath>
         </defs>
@@ -27,7 +25,7 @@
         <rect class="rf-inlet" x="88" y="100" width="20" height="10" rx="2"/>
         <rect class="rf-glass" x="56" y="117" width="88" height="31" rx="5"/>
         <g clip-path="url(#rf-tank)">
-            <rect id="rf-tank-water" x="56" y="117" width="88" height="31" fill="url(#rf-water)"/>
+            <rect id="rf-tank-water" class="rf-water" x="56" y="117" width="88" height="31"/>
         </g>
         <rect class="rf-shine" x="60" y="120" width="5" height="25" rx="2.5"/>
         <!-- Filet d'eau bouteille -> bouchon -->
@@ -36,7 +34,7 @@
         <g transform="translate(98 86) rotate(-38)">
             <rect class="rf-glass" x="-15" y="-73" width="30" height="55" rx="7"/>
             <g clip-path="url(#rf-bottle)">
-                <rect id="rf-bottle-water" x="-15" y="-73" width="30" height="55" fill="url(#rf-water)"/>
+                <rect id="rf-bottle-water" class="rf-water" x="-15" y="-73" width="30" height="55"/>
             </g>
             <path class="rf-glass" d="M-15 -24 Q-15 -14 -5 -12 L-5 0 L5 0 L5 -12 Q15 -14 15 -24 Z"/>
             <rect class="rf-label" x="-15" y="-56" width="30" height="16"/>

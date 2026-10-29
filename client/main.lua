@@ -12,7 +12,7 @@ local HASH = joaat(ITEM)
 local RAY_FLAGS = 1 | 2 | 16   -- carte, véhicules, objets
 
 local function notify(msg, kind)
-    lib.notify({ description = msg, type = kind or 'inform' })
+    lib.notify({ description = msg, type = kind or 'inform', style = Config.NotifyStyle })
 end
 
 local function rotToDir(rot)
